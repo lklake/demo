@@ -237,6 +237,12 @@ int app_main() {
                             LOG_ERR("server failed to return:%s", output);
                         }
                         free(output);
+                        XKeyEvent event =ev.xkey;
+                        event.serial = 0;
+                        event.time = CurrentTime;
+                        //https://tronche.com/gui/x/xlib/event-handling/XSendEvent.html
+                        XSendEvent(dpy,ev.xkey.window,True,KeyPressMask,(XEvent *)&event);
+                        XFlush(dpy);
                         break;
                     }
                     case KeyRelease: {
@@ -250,6 +256,12 @@ int app_main() {
                             LOG_ERR("server failed to return:%s", output);
                         }
                         free(output);
+                        XKeyEvent event =ev.xkey;
+                        event.serial = 0;
+                        event.time = CurrentTime;
+                        //https://tronche.com/gui/x/xlib/event-handling/XSendEvent.html
+                        XSendEvent(dpy,ev.xkey.window,True,KeyReleaseMask,(XEvent *)&event);
+                        XFlush(dpy);
                         break;
                     }
                 }
