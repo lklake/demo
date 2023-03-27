@@ -139,7 +139,7 @@ static void stopGrabbing() {
         LOG_MSG("stop grabbing");
         XUngrabKeyboard(dpy, CurrentTime);
         //清除由于 ungrab 产生的Focus in事件，防止Focus in事件对应的窗口已经关闭。
-        XSync(dpy, True);
+//        XSync(dpy, False);
         isGrabbing = 0;
     }
 }
@@ -149,7 +149,7 @@ static void tryGrabFocusedWindow(LinkedList *tagList) {
     Window currentFocus = getCurrentFocus();
     for (int i = 0; i < tagList->size(tagList); i++) {
         if (isTargetWindow(currentFocus, tagList->at(tagList, i))) {
-            startGrabbing(XDefaultRootWindow(dpy));
+            startGrabbing(currentFocus);
             break;
         }
     }
@@ -275,7 +275,7 @@ int app_main() {
 }
 
 int x11_error_handler(Display *display, XErrorEvent *error) {
-//    LOG_ERR("ERROR: X11 error");
+    LOG_ERR("ERROR: X11 error");
     return 1;
 }
 
