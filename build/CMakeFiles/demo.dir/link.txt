@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/demo.dir/client.c.o CMakeFiles/demo.dir/LinkedList.c.o CMakeFiles/demo.dir/kbd_client.c.o -o demo  -ldbus-1 /usr/lib/x86_64-linux-gnu/libSM.so /usr/lib/x86_64-linux-gnu/libICE.so /usr/lib/x86_64-linux-gnu/libX11.so /usr/lib/x86_64-linux-gnu/libXext.so 

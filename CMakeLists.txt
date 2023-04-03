@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.25)
+cmake_minimum_required(VERSION 3.24)
 project(demo C)
 
 set(CMAKE_C_STANDARD 11)
@@ -16,8 +16,12 @@ find_package(X11 REQUIRED)
 #link_directories( ${X11_LIBRARIES})
 
 #link_libraries(-lX11 -lXRes)
+#add_executable(demo
+#        demo.c
+#        LinkedList.c
+#        LinkedList.h  kbd_client.c kbd_client.h demo_error.h client.c)
 add_executable(demo
-        demo.c
+        client.c
         LinkedList.c
         LinkedList.h  kbd_client.c kbd_client.h demo_error.h)
 
