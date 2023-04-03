@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "signal.h": "c",
+        "kbd_client.h": "c",
+        "xlib.h": "c",
+        "xkblib.h": "c",
+        "stdio.h": "c",
+        "demo_error.h": "c",
+        "dbus.h": "c"
+    }
+}
