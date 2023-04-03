@@ -1,0 +1,4 @@
+/home/zhangxg/mybak/demo/build/CMakeFiles/demo.dir
+/home/zhangxg/mybak/demo/build/CMakeFiles/kbd_server.dir
+/home/zhangxg/mybak/demo/build/CMakeFiles/edit_cache.dir
+/home/zhangxg/mybak/demo/build/CMakeFiles/rebuild_cache.dir
