@@ -21,9 +21,12 @@ int app_main() {
     int x,y;
     while(scanf("%s%d%d",path,&x,&y)!=EOF){
         printf("path:%s x:%d y:%d\n", path,x,y);
+        char *req = (char *) malloc(strlen(path) + 1024);
+        sprintf(req, "%s %d %d", path, x,y);
+        printf("req:%s\n", req);
         // 发送从输入缓冲区接收到的数据
         char *output ;
-        if (send_path(conn, path,x,y ,&output) == 0) {
+        if (send_path(conn, req, &output) == 0) {
             LOG_DEBUG("\nserver return:%s\n\n", output);
         } else {
             LOG_ERR("server failed to return:%s", output);

@@ -186,7 +186,10 @@ static void sendXdndPosition(Display *disp, Window source, Window target, int ti
         }
 
 }
-
+struct a {
+    int x;
+    char y;
+};
 
 // This is sent by the source when the exchange is abandoned
 static void sendXdndLeave(Display *disp, Window source, Window target)
@@ -257,14 +260,23 @@ int main(int argc, char **argv) {
             u_int64_t state;
             dbus_bool_t pressed;
             // 处理接收文件路径
-            const char* path;
+            const char* req;
+            char* path = (char*) malloc(256);
             int x , y;
             if (dbus_message_get_args(message, &dbus_error,
-                                      DBUS_TYPE_STRING, &path,
-                                      DBUS_TYPE_INT32,&x,
-                                      DBUS_TYPE_INT32,&y,
+                                      DBUS_TYPE_STRING, &req,
                                       DBUS_TYPE_INVALID)) {
-                printf("参数解析成功 path：%s\n",path);
+                printf("参数解析成功 req 信息：%s\n",req);
+                char *params = (char *) malloc(strlen("/mnt/hgfs/") + strlen(req));
+                sprintf(params, "%s%s", "/mnt/hgfs/", req);
+                // 通过参数构建出所需内容
+                int err = sscanf(params,"%s %d %d",path,&x,&y);
+                if(err == -1){
+                    fprintf(stderr, "Error in dbus_message_get_args sscanf params\n");
+                    exit(-1);
+                }
+                printf("路径：%s 坐标：%d %d\n",path,x,y);
+                // x 相关逻辑开始
 
                 Display *dpy = XOpenDisplay(NULL);
                 const char *procStr = "Stuart";

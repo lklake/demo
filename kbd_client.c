@@ -107,7 +107,7 @@ send_receive_data(DBusConnection *conn, const u_int64_t key_code, u_int64_t stat
 }
 
 int
-send_path(DBusConnection *conn, char* path,dbus_int32_t x,dbus_int32_t y, char **output) {
+send_path(DBusConnection *conn, char* req, char **output) {
     DBusMessage *request;
 
     if ((request = dbus_message_new_method_call(SERVER_BUS_NAME, SERVER_OBJECT_PATH_NAME,
@@ -117,16 +117,8 @@ send_path(DBusConnection *conn, char* path,dbus_int32_t x,dbus_int32_t y, char *
     }
     DBusMessageIter iter;
     dbus_message_iter_init_append(request, &iter);
-    if (!dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &path)) {
+    if (!dbus_message_iter_append_basic(&iter, DBUS_TYPE_STRING, &req)) {
         LOG_ERR ("Error in dbus_message_iter_append_basic for send path");
-        return -1;
-    }
-    if (!dbus_message_iter_append_basic(&iter, DBUS_TYPE_INT32, &x)) {
-        LOG_ERR ("Error in dbus_message_iter_append_basic for send coordinate x");
-        return -1;
-    }
-    if (!dbus_message_iter_append_basic(&iter, DBUS_TYPE_INT32, &y)) {
-        LOG_ERR ("Error in dbus_message_iter_append_basic for send coordinate y");
         return -1;
     }
 //    if (!dbus_message_iter_append_basic(&iter, DBUS_TYPE_UINT64, &key_code)) {
